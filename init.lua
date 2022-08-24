@@ -19,3 +19,9 @@ require "user.indentline"
 require "user.alpha"
 require "user.whichkey"
 require "user.autocommands"
+require "user.crates"
+require "user.surround"
+require "user.vim-zoom"
+
+vim.cmd "colorscheme nord"
+vim.cmd([[set statusline+=\ %{&filetype==\"toggleterm\"?\"terminal(\".b:toggle_number.\")\":\"\"}]])
