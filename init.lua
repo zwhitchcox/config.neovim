@@ -24,4 +24,3 @@ require "user.surround"
 require "user.vim-zoom"
 
 vim.cmd "colorscheme darkplus"
-vim.cmd([[set statusline+=\ %{&filetype==\"toggleterm\"?\"terminal(\".b:toggle_number.\")\":\"\"}]])
