@@ -183,6 +183,29 @@ local mappings = {
     v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
   },
 }
+vim.cmd(([[
+autocmd BufNewFile,BufRead *.sh,*.conf lua whichkeyHashHeaders()
+]]))
 
+_G.whichkeyHashHeaders = function()
+  local buf = vim.api.nvim_get_current_buf()
+  which_key.register({
+    d = {
+      name = "Format",
+      h = { "<cmd>center 80<cr>hhv0r#A<space><esc>40A#<esc>", "header",  buffer = buf }
+    },
+  }, opts)
+end
+
+-- _G.whichkeyHashHeaders = function()
+--   local buf = vim.api.nvim_get_current_buf()
+--   which_key.register({
+--     D = {
+--       name = "Format",
+--       h = { "<cmd>center 80<cr>hhv0r#A<space><esc>40A#<esc>", "header",  buffer = buf }
+--     },
+--   }, opts)
+-- end
+--
 which_key.setup(setup)
 which_key.register(mappings, opts)
