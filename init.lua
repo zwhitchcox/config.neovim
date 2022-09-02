@@ -23,4 +23,4 @@ require "user.crates"
 require "user.surround"
 require "user.vim-zoom"
 
-vim.cmd "colorscheme darkplus"
+vim.cmd "colorscheme tokyonight"
