@@ -1,12 +1,18 @@
-local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then
-  return
-end
+vim.cmd "packadd nvim-cmp"
 
-local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
-  return
-end
+-- vim.cmd "packadd cmp-cmdline" -- command line completion
+-- vim.cmd "packadd cmp-buffer" -- buffer text source for nvim-cmp
+-- -- vim.cmd "packadd cmp-conjure" -- conjure source for nvim-cmp
+vim.cmd "packadd cmp_luasnip" -- integrates luasnip with nvim-cmp
+vim.cmd "packadd cmp-nvim-lsp" -- lsp source for nvim-cmp
+-- vim.cmd "packadd cmp-nvim-lua" -- lua source for nvim-cmp
+-- vim.cmd "packadd cmp-path" -- filesystem source for nvim-cmp
+-- vim.cmd "packadd cmp-spell" -- spelling source for nvim-cmp
+-- vim.cmd "packadd cmp-treesitter" -- tree sitter source for nvim-cmp
+-- vim.cmd "packadd cmp-calc" -- calc source for nvim-cmp
+
+local cmp = require "cmp"
+local luasnip = require "luasnip"
 
 require("luasnip.loaders.from_snipmate").lazy_load()
 require("luasnip/loaders/from_vscode").lazy_load()
@@ -107,6 +113,10 @@ cmp.setup {
         luasnip = "[Snippet]",
         buffer = "[Buffer]",
         path = "[Path]",
+        spell = "[Spell]",
+        calc = "[Calc]",
+        cmdline = "[Cmdline]",
+        crates = "[Crates]",
       })[entry.source.name]
       return vim_item
     end,
@@ -119,6 +129,10 @@ cmp.setup {
     { name = "buffer" },
     { name = "path" },
     { name = "crates" },
+    { name = "spell" },
+    { name = "treesitter" },
+    { name = "cmdline" },
+    { name = "calc" },
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
@@ -129,8 +143,8 @@ cmp.setup {
       border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
     },
   },
-  experimental = {
-    ghost_text = false,
-    native_menu = false,
-  },
+  -- experimental = {
+  --   ghost_text = false,
+  --   native_menu = false,
+  -- },
 }
