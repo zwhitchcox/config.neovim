@@ -92,6 +92,7 @@ return packer.startup(function(use)
  	use({ "sheerun/vim-polyglot", commit = "bc8a81d3592dab86334f27d1d43c080ebf680d42" })
  	use({ "ethanholz/nvim-lastplace", commit = "ecced899435c6bcdd81becb5efc6d5751d0dc4c8" })
  	use({ "ahmedkhalf/project.nvim", commit = "685bc8e3890d2feb07ccf919522c97f7d33b94e4" })
+ 	use({ "williamboman/mason.nvim", commit = "1c23135467af667c61aef72a7c08b9a032c50a52" })
 
 -- 	use({ "wbthomason/packer.nvim", commit = "00ec5adef58c5ff9a07f11f45903b9dbbaa1b422" }) -- Have packer manage itself
 -- 	use({ "nvim-lua/plenary.nvim" }) -- Useful lua functions used by lots of plugins
