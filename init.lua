@@ -25,5 +25,6 @@ require "user.vim-polyglot"
 require "user.which-key-nvim"
 require "user.zoom"
 require "user.keymaps"
+require "user.mason"
 
 -- vim.cmd "colorscheme tokyonight"
