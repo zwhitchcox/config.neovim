@@ -42,14 +42,22 @@ packer.init({
 -- Install your plugins here
 return packer.startup(function(use)
 	-- My plugins here
-
-	use({ "ms-jpq/coq_nvim", commit = "49189b020236002bae41f823da9ac0f73dca873f" })
-	use({ "ms-jpq/coq.thirdparty" })
+    
+    use({ "github/copilot.vim" })
+	-- use({ "ms-jpq/coq_nvim", commit = "49189b020236002bae41f823da9ac0f73dca873f" })
+	-- use({ "ms-jpq/coq.thirdparty" })
     use({ "godlygeek/tabular", commit = "339091ac4dd1f17e225fe7d57b48aff55f99b23a" })
     use({ "tpope/vim-commentary", commit = "e87cd90dc09c2a203e13af9704bd0ef79303d755" })
     use({ "tpope/vim-eunuch", commit = "291ef1f8c8996ca7715df1032a35a27b12d7b5cf" })
     use({ "tpope/vim-surround", commit = "3d188ed2113431cf8dac77be61b842acb64433d9" })
     use({ "p00f/nvim-ts-rainbow", commit = "064fd6c0a15fae7f876c2c6dd4524ca3fad96750" })
+    use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-nvim-lua', 'onsails/lspkind-nvim' } }
+    use { 'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp' }
+    use { 'hrsh7th/vim-vsnip', requires = 'hrsh7th/nvim-cmp' }
+    use { 'hrsh7th/cmp-vsnip', requires = 'hrsh7th/nvim-cmp' }
+    use { 'hrsh7th/cmp-calc', requires = 'hrsh7th/nvim-cmp' }
+    use { 'hrsh7th/cmp-emoji', requires = 'hrsh7th/nvim-cmp' }
+    use { 'hrsh7th/cmp-path', requires = 'hrsh7th/nvim-cmp' }
     use({ "hrsh7th/cmp-cmdline", commit = "8bc9c4a34b223888b7ffbe45c4fe39a7bee5b74d" })
     use({ "hrsh7th/cmp-buffer", commit = "3022dbc9166796b644a841a02de8dd1cc1d311fa" })
     use({ "saadparwaiz1/cmp_luasnip", commit = "18095520391186d634a0045dacaa346291096566" })
@@ -60,7 +68,6 @@ return packer.startup(function(use)
     use({ "ray-x/cmp-treesitter", commit = "b40178b780d547bcf131c684bc5fd41af17d05f2" })
     use({ "hrsh7th/cmp-calc", commit = "50792f34a628ea6eb31d2c90e8df174671e4e7a0" })
     use({ "folke/tokyonight.nvim", commit = "62b4e89ea1766baa3b5343ca77d62c817f5f48d0" })
-    use({ "github/copilot.vim", commit = "5a411d19ce7334ab10ba12516743fc25dad363fa" })
     use({ "direnv/direnv.vim", commit = "4c858b8cd8cbfac998534096e6ffb710d7a07358" })
     use({ "junegunn/goyo.vim", commit = "7f5d35a65510083ea5c2d0941797244b9963d4a9" })
     use({ "tpope/vim-fugitive", commit = "23b9b9b2a3b88bdefee8dfd1126efb91e34e1a57" })

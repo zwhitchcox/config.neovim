@@ -16,5 +16,5 @@ local keymaps = require'user.utils'.keymaps
 -- vim.cmd 'packadd coq_nvim'
 
 -- require 'coq_3p' {
---   { src = 'copilot', short_name = 'COP', accept_key = '<c-f>' }
+-- --   { src = 'copilot', short_name = 'COP', accept_key = '<c-f>' }
 -- }
