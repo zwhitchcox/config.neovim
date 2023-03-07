@@ -67,6 +67,17 @@ return packer.startup(function(use)
     use({ "f3fora/cmp-spell", commit = "60584cb75e5e8bba5a0c9e4c3ab0791e0698bffa" })
     use({ "ray-x/cmp-treesitter", commit = "b40178b780d547bcf131c684bc5fd41af17d05f2" })
     use({ "hrsh7th/cmp-calc", commit = "50792f34a628ea6eb31d2c90e8df174671e4e7a0" })
+    use {
+      'morhetz/gruvbox',
+      requires = { 'rktjmp/lush.nvim' },
+      config = function()
+        vim.g.gruvbox_italic = 1
+        vim.g.gruvbox_contrast_dark = 'hard'
+        vim.g.gruvbox_contrast_light = 'hard'
+        vim.cmd('colorscheme gruvbox')
+      end
+    }
+
     use({ "folke/tokyonight.nvim", commit = "62b4e89ea1766baa3b5343ca77d62c817f5f48d0" })
     use({ "direnv/direnv.vim", commit = "4c858b8cd8cbfac998534096e6ffb710d7a07358" })
     use({ "junegunn/goyo.vim", commit = "7f5d35a65510083ea5c2d0941797244b9963d4a9" })
@@ -100,6 +111,12 @@ return packer.startup(function(use)
  	use({ "ethanholz/nvim-lastplace", commit = "ecced899435c6bcdd81becb5efc6d5751d0dc4c8" })
  	use({ "ahmedkhalf/project.nvim", commit = "685bc8e3890d2feb07ccf919522c97f7d33b94e4" })
  	use({ "williamboman/mason.nvim", commit = "1c23135467af667c61aef72a7c08b9a032c50a52" })
+    use({
+      "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+      config = function()
+        require("lsp_lines").setup()
+      end,
+    })
 
 -- 	use({ "wbthomason/packer.nvim", commit = "00ec5adef58c5ff9a07f11f45903b9dbbaa1b422" }) -- Have packer manage itself
 -- 	use({ "nvim-lua/plenary.nvim" }) -- Useful lua functions used by lots of plugins

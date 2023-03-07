@@ -106,6 +106,7 @@ end
 
 lspconf.tsserver.setup {
   on_attach = on_attach,
+  tsconfig = "./tsconfig.json"
 }
 
 require('lspconfig')['rust_analyzer'].setup{

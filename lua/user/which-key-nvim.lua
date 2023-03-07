@@ -161,6 +161,11 @@ wk.register ({
     ['|'] = { '<Cmd>vertical resize 106<CR>' , 'Full line-lenght' },
   },
 
+  v = {
+    name = "View",
+    b = { "<cmd>lua ToggleBackground()<cr>", "Toggle Background" },
+  },
+
   -- Git
   g = {
     name = '+Git',

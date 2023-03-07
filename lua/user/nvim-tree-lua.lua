@@ -13,7 +13,7 @@ end
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup {
-  sync_root_with_cwd = true,
+  -- sync_root_with_cwd = true,
   respect_buf_cwd = false,
   update_focused_file = {
     enable = true,
