@@ -3,6 +3,40 @@
 vim.cmd 'packadd which-key.nvim'
 vim.cmd 'packadd! gitsigns.nvim' -- needed for some mappings
 
+blacklisted = {
+  'blue',
+  'darkblue',
+  'desert',
+  'default',
+  'delek',
+  'elflord',
+  'evening',
+  'habamax',
+  'industry',
+  'koehler',
+  'morning',
+  'murphy',
+  'one',
+  'pablo',
+  'peachpuff',
+  'quiet',
+  'ron',
+  'shine',
+  'slate',
+  'torte',
+  'zenburn',
+  'zellner',
+}
+
+local available_colorschemes = vim.fn.getcompletion('', 'color')
+local colorscheme_options = {}
+colorscheme_options['name'] = 'Colorscheme'
+for _, scheme in ipairs(available_colorschemes) do
+  if not vim.tbl_contains(blacklisted, scheme) then
+    colorscheme_options[scheme:sub(1,1):lower()] = {string.format("<cmd>lua SetColorscheme('%s')<cr>", scheme), scheme}
+  end
+end
+
 local wk = require 'which-key'
 wk.setup {
   plugins = {
@@ -163,7 +197,8 @@ wk.register ({
 
   v = {
     name = "View",
-    b = { "<cmd>lua ToggleBackground()<cr>", "Toggle Background" },
+    b = { "<cmd>lua ToggleBackground()<cr>", "Toggle Background Light/Dark" },
+    c = colorscheme_options,
   },
 
   -- Git

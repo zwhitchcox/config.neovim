@@ -74,9 +74,12 @@ return packer.startup(function(use)
         vim.g.gruvbox_italic = 1
         vim.g.gruvbox_contrast_dark = 'hard'
         vim.g.gruvbox_contrast_light = 'hard'
-        vim.cmd('colorscheme gruvbox')
       end
     }
+    use 'overcache/NeoSolarized'
+    use 'shaunsingh/nord.nvim'
+    use 'rakr/vim-one'
+    use 'NLKNguyen/papercolor-theme'
 
     use({ "folke/tokyonight.nvim", commit = "62b4e89ea1766baa3b5343ca77d62c817f5f48d0" })
     use({ "direnv/direnv.vim", commit = "4c858b8cd8cbfac998534096e6ffb710d7a07358" })

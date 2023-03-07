@@ -1,4 +1,4 @@
-vim.cmd 'colorscheme tokyonight'
+-- vim.cmd 'colorscheme tokyonight'
 -- -- Colorscheme build in Lua with `lush.nvim`, modeled initially on Solarized, but intended to be
 -- -- usable with alternate colors.
 -- -- Still early days, with lots of work needed
