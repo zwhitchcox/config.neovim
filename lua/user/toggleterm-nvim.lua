@@ -35,6 +35,112 @@ require'toggleterm'.setup {
 	},
 }
 
+
+
+
+local function get_current_toggleterm_bufnr()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
+  if filetype == 'toggleterm' then
+    return bufnr
+  else
+    return nil
+  end
+end
+
+local function get_current_toggleterm()
+  local bufnr = get_current_toggleterm_bufnr()
+  local terms = require("toggleterm.terminal").get_all()
+
+  for _, term in ipairs(terms) do
+    if term.bufnr == bufnr then
+      return term
+    end
+  end
+end
+
+-- Load the required library for creating new toggle terms
+local Terminal = require("toggleterm.terminal").Terminal
+
+-- Define a function to toggle to the next terminal
+function SwitchToggleTerm(direction)
+  -- If no direction is specified, default to 1
+  if direction == nil then
+    direction = 1
+  end
+  
+  -- Get the buffer number of the current toggle term
+  local cur_toggleterm_bufnr = get_current_toggleterm_bufnr()
+  
+  -- Get all open toggle terms
+  local terms = require("toggleterm.terminal").get_all()
+  
+  -- Loop through all the terms to find the current one
+  for _, term in ipairs(terms) do
+    if term.bufnr == cur_toggleterm_bufnr then
+      -- Calculate the ID of the next term
+      local new_id = term.id + direction
+      
+      -- If the new ID is less than 1, wrap around to the end
+      if new_id < 1 then
+        new_id = #terms
+      end
+      if new_id == term.id then
+        return
+      end
+      
+      -- Get the next term based on the new ID
+      local next_term = require("toggleterm.terminal").get(new_id)
+      
+      -- If there is no next term, create a new one
+      if next_term == nil then
+        Terminal:new({
+          direction = term.direction,
+          auto_scroll = false,
+          start_in_insert = true,
+          on_open = function()
+            -- Schedule the startinsert command to be executed after 0 seconds
+            vim.schedule(function()
+              vim.api.nvim_command([[startinsert]])
+            end, 0)
+          end,
+        }):toggle()
+      else
+        -- If there is a next term, toggle to it and start in insert mode
+        next_term:toggle()
+        vim.schedule(function()
+          vim.api.nvim_command([[startinsert]])
+        end, 0)
+      end
+      
+      -- Close the current term
+      term:close()
+    end
+  end
+end
+
+function ToggleDirectionAll()
+  local cur_term = get_current_toggleterm()
+  local terms = require("toggleterm.terminal").get_all()
+  for _, term in ipairs(terms) do
+    local direction = term.direction
+    if direction == "horizontal" then
+      term.direction = "vertical"
+    elseif direction == "vertical" then
+      term.direction = "float"
+    else
+      term.direction = "horizontal"
+    end
+    term:toggle()
+  end
+  if cur_term ~= nil then
+    cur_term:toggle()
+    vim.schedule(function()
+      vim.api.nvim_command([[startinsert]])
+    end, 0)
+  end
+end
+
 utils.augroup { name = 'UserToggleTermKeymaps', cmds = {
   { 'FileType', {
     pattern = 'toggleterm',
@@ -50,54 +156,11 @@ utils.augroup { name = 'UserToggleTermKeymaps', cmds = {
       vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
       vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
       vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
+      -- keyboard mappings
+      -- vim.api.nvim_buf_set_keymap(0, 't', '<C-a>', [[<cmd>lua ToggleTerm()<CR>]], { noremap = true, silent = true })
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-a-h>', [[<cmd>lua SwitchToggleTerm(-1)<CR>]], { noremap = true, silent = true })
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-a-l>', [[<cmd>lua SwitchToggleTerm(1)<CR>]], { noremap = true, silent = true })
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-a-t>', [[<cmd>lua ToggleDirectionAll()<CR>]], { noremap = true, silent = true })
     end
   }},
 }}
-
-local Terminal = require("toggleterm.terminal").Terminal
-local lazygit = Terminal:new({
-  cmd = "lazygit",
-  -- dir = "git_dir",
-  direction = "float",
-  float_opts = {
-    border = "double",
-  },
-  -- function to run on opening the terminal
-  on_open = function(term)
-    vim.cmd("startinsert!")
-    vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
-  end,
-  -- function to run on closing the terminal
-  on_close = function(term)
-    vim.cmd("startinsert!")
-  end,
-})
--- local Terminal = require("toggleterm.terminal").Terminal
-function _LAZYGIT_TOGGLE()
-  -- vim.cmd('set statusline += \'%{&ft == "toggleterm" ? "terminal (".b:toggle_number.")" : ""}\'')
-	lazygit:toggle()
-end
-
-local node = Terminal:new({ cmd = "node", hidden = true })
-
-function _NODE_TOGGLE()
-	node:toggle()
-end
-
-local ncdu = Terminal:new({ cmd = "ncdu", hidden = true })
-
-function _NCDU_TOGGLE()
-	ncdu:toggle()
-end
-
-local htop = Terminal:new({ cmd = "htop", hidden = true })
-
-function _HTOP_TOGGLE()
-	htop:toggle()
-end
-
-local python = Terminal:new({ cmd = "python", hidden = true })
-
-function _PYTHON_TOGGLE()
-	python:toggle()
-end
