@@ -19,7 +19,7 @@ lspconf.sourcekit.setup {}
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-lspconf.sumneko_lua.setup {
+lspconf.lua_ls.setup {
   settings = {
     Lua = {
       runtime = {
