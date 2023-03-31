@@ -15,6 +15,7 @@ lspconf.jsonls.setup {}
 lspconf.pyright.setup {}
 lspconf.rnix.setup {}
 lspconf.sourcekit.setup {}
+lspconf.prismals.setup {}
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
@@ -118,3 +119,17 @@ require('lspconfig')['rust_analyzer'].setup{
 }
 
 require('lspconfig')['cmake'].setup {}
+
+lspconf.prismals.setup {
+  on_attach = function(client, bufnr)
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+    local opts = { noremap=true, silent=true }
+
+    buf_set_keymap('n', '<Leader>df', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap('n', '<Leader>td', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    buf_set_keymap('n', '<Leader>rn', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    buf_set_keymap('n', '<Leader>ca', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    buf_set_keymap('n', '<Leader>ci', '<Cmd>lua vim.lsp.buf.incoming_calls()<CR>', opts)
+    buf_set_keymap('n', '<Leader>co', '<Cmd>lua vim.lsp.buf.outgoing_calls()<CR>', opts)
+  end
+}

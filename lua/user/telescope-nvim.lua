@@ -109,7 +109,7 @@ telescope.setup {
           d = actions.delete_buffer
         }
       }
-    }
+    },
   },
   extensions = {
     -- file_browser = {

@@ -28,4 +28,3 @@ require "user.keymaps"
 require "user.mason"
 require "user.color"
 
--- vim.cmd "colorscheme tokyonight"
