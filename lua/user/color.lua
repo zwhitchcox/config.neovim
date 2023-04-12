@@ -58,3 +58,25 @@ if vim.fn.filereadable(config_file_background_mode) == 1 then
   vim.g.background_mode = background_mode:gsub('%s+', '') -- remove any whitespace
   vim.o.background = vim.g.background_mode
 end
+
+function SetLight()
+  vim.cmd('colorscheme gruvbox')
+  vim.cmd('set background=light')
+  vim.g.background_mode = 'light'
+  vim.g.colorscheme = 'gruvbox'
+end
+
+function SetDark()
+  vim.cmd('colorscheme tokyonight')
+  vim.cmd('set background=dark')
+  vim.g.background_mode = 'dark'
+  vim.g.colorscheme = 'gruvbox'
+end
+
+function ToggleBackground()
+  if vim.g.background_mode == 'light' then
+    SetDark()
+  else
+    SetLight()
+  end
+end

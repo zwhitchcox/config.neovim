@@ -199,7 +199,11 @@ wk.register ({
     name = "View",
     b = { "<cmd>lua ToggleBackground()<cr>", "Toggle Background Light/Dark" },
     c = colorscheme_options,
+    l = { "<cmd>lua SetLight()<cr>", "Set Light Background" },
+    d = { "<cmd>lua SetDark()<cr>", "Set Dark Background" },
+    t = { "<cmd>lua ToggleBackground()<cr>", "Toggle Background Light/Dark" },
   },
+  b = { '<cmd>lua ToggleBackground()<cr>', "Toggle Background Light/Dark" },
 
   -- Git
   g = {
