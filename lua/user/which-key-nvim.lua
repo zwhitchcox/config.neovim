@@ -3,7 +3,7 @@
 vim.cmd 'packadd which-key.nvim'
 vim.cmd 'packadd! gitsigns.nvim' -- needed for some mappings
 
-blacklisted = {
+local blacklisted = {
   'blue',
   'darkblue',
   'desert',
@@ -94,7 +94,7 @@ wk.setup {
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
   show_help = true, -- show help message on the command line when the popup is visible
   triggers = "auto", -- automatically setup triggers
-  -- triggers = {"<leader>"} -- or specify a list manually
+  -- triggers = {"<leader>"}, -- or specify a list manually
   triggers_blacklist = {
     -- list of mode / prefixes that should never be hooked by WhichKey
     -- this is mostly relevant for key maps that start with a native binding
@@ -253,6 +253,8 @@ wk.register ({
     t = { vim.lsp.buf.type_definition    , 'Jump to type definition' },
     n = { function() vim.diagnostic.goto_next({float = false}) end, 'Jump to next diagnostic' },
     N = { function() vim.diagnostic.goto_prev({float = false}) end, 'Jump to next diagnostic' },
+    C = { copy_diagnostics_to_clipboard_all, 'Copy all diagnostics to clipboard' },
+    c = { copy_diagnostics_to_clipboard_current_line, 'Copy diagnostic to clipboard (current line)' },
     T = {
       name = '+Telescope',
       a = { '<Cmd>Telescope lsp_code_actions<CR>'       , 'Code actions'         },
@@ -300,11 +302,11 @@ wk.register ({
 
 }, { prefix = ' ' })
 
--- Spaced prefiexd in mode Visual mode
+-- Spaced prefixed in mode Visual mode
 wk.register ({
   l = {
     name = '+LSP',
     a = { ':<C-U>Lspsaga range_code_action<CR>' , 'Code action (range)' , mode = 'v' },
+    c = { copy_selected_code_and_diagnostics_to_clipboard, 'Copy selected code and diagnostics to clipboard' , mode = 'v' },
   },
-}, { prefix = ' ' })
-
+}, { prefix = ' ' , mode = 'v' })
