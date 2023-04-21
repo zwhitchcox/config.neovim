@@ -37,6 +37,9 @@ for _, scheme in ipairs(available_colorschemes) do
   end
 end
 
+
+
+local status_ok, cmp = pcall(require, "cmp")
 local wk = require 'which-key'
 wk.setup {
   plugins = {

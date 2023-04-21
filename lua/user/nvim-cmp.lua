@@ -58,7 +58,28 @@ cmp.setup {
       luasnip.lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
+  enabled = false,
   mapping = {
+      -- ["<C-k>"] = cmp.mapping({
+      --   i = function()
+      --     if cmp.visible() then
+      --       require("notify")("visible")
+      --       cmp.abort()
+      --     else
+      --       require("notify")("not visible")
+      --       cmp.complete()
+      --     end
+      --   end,
+      --   c = function()
+      --     if cmp.visible() then
+      --       require("notify")("visible")
+      --       cmp.close()
+      --     else
+      --       require("notify")("not visible")
+      --       cmp.complete()
+      --     end
+      --   end,
+      -- }),
     ["<C-k>"] = cmp.mapping.select_prev_item(),
 		["<C-j>"] = cmp.mapping.select_next_item(),
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
