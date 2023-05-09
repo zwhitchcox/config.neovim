@@ -119,6 +119,10 @@ require('lspconfig')['rust_analyzer'].setup{
     }
 }
 
+require'lspconfig'.cssls.setup{
+  on_attach = on_attach,
+}
+
 require('lspconfig')['cmake'].setup {}
 
 lspconf.prismals.setup {

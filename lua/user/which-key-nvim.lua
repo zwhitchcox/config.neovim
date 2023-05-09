@@ -243,6 +243,7 @@ wk.register({
     D = { vim.lsp.buf.declaration, 'Jump to declaration' },
     a = { '<Cmd>Lspsaga code_action<CR>', 'Code action' },
     f = { vim.lsp.buf.format, 'Format' },
+    l = { '<Cmd>Lspsaga show_line_diagnostics<CR>', 'Line diagnostics' },
     r = { '<Cmd>Lspsaga rename<CR>', 'Rename' },
     t = { vim.lsp.buf.type_definition, 'Jump to type definition' },
     n = { function() vim.diagnostic.goto_next({ float = false }) end, 'Jump to next diagnostic' },

@@ -1,10 +1,10 @@
 -- lsp_lines.nvim
 -- https://git.sr.ht/~whynothugo/lsp_lines.nvim
-vim.cmd 'packadd lsp_lines.nvim'
+-- vim.cmd 'packadd lsp_lines.nvim'
 
-require'lsp_lines'.setup()
+-- require'lsp_lines'.setup()
 
-vim.diagnostic.config({ virtual_lines = { only_current_line = true } })
+-- vim.diagnostic.config({ virtual_lines = { only_current_line = true } })
 
 function _G.copy_diagnostics_to_clipboard_all()
   local diagnostics = vim.diagnostic.get(0)
