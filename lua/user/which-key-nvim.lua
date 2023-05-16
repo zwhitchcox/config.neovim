@@ -38,6 +38,15 @@ for _, scheme in ipairs(available_colorschemes) do
 end
 
 
+function restart_language_server()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.buf_get_clients(bufnr)
+
+  for _, client in ipairs(clients) do
+    client.stop()
+    vim.defer_fn(function() client.start() end, 500)
+  end
+end
 
 local status_ok, cmp = pcall(require, "cmp")
 local wk = require 'which-key'
@@ -115,6 +124,7 @@ wk.register({
     ['2']  = { "<cmd>2ToggleTerm<cr>", "Second Terminal" },
     ['3']  = { "<cmd>3ToggleTerm<cr>", "Third Terminal" },
     ['4']  = { "<cmd>3ToggleTerm<cr>", "Fourth Terminal" },
+    d      = { "<cmd>lua OpenTermAndRun('npm run dev')<cr>", "npm run dev" }, -- add this line
     n      = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
     u      = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
     t      = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
@@ -245,6 +255,7 @@ wk.register({
     f = { vim.lsp.buf.format, 'Format' },
     l = { '<Cmd>Lspsaga show_line_diagnostics<CR>', 'Line diagnostics' },
     r = { '<Cmd>Lspsaga rename<CR>', 'Rename' },
+    R = { '<cmd>LspRestart<CR>', 'Restart Language Server' },
     t = { vim.lsp.buf.type_definition, 'Jump to type definition' },
     n = { function() vim.diagnostic.goto_next({ float = false }) end, 'Jump to next diagnostic' },
     N = { function() vim.diagnostic.goto_prev({ float = false }) end, 'Jump to next diagnostic' },
@@ -290,8 +301,10 @@ wk.register({
       t = { '<Cmd>Telescope filetypes<CR>', 'Filetypes' },
     },
     s = {
-      function() require 'telescope.builtin'.symbols(require 'telescope.themes'.get_dropdown({
-          sources = { 'emoji', 'math' } })) end, 'Symbols' },
+      function()
+        require 'telescope.builtin'.symbols(require 'telescope.themes'.get_dropdown({
+          sources = { 'emoji', 'math' } }))
+      end, 'Symbols' },
     z = { '<Cmd>Telescope zoxide list<CR>', 'Z' },
     ['?'] = { '<Cmd>Telescope help_tags<CR>', 'Vim help' },
   }

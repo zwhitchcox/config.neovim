@@ -134,6 +134,7 @@ return packer.startup(function(use)
   use 'jvgrootveld/telescope-zoxide'            -- adds integration with the Zoxide directory jump tool
   use 'nvim-telescope/telescope-ui-select.nvim' -- provides a UI for selecting multiple results in the fuzzy finder
 
+  use 'f-person/auto-dark-mode.nvim'
 require('packer').use { 'mhartington/formatter.nvim' }
 
 

@@ -176,3 +176,20 @@ utils.augroup { name = 'UserToggleTermKeymaps', cmds = {
     end
   } },
 } }
+
+
+
+-- Create a new terminal and run a command in it
+function OpenTermAndRun(command)
+  local term = Terminal:new({
+    direction = "vertical",
+    auto_scroll = false,
+    start_in_insert = true,
+    on_open = function(term)
+      vim.schedule(function()
+        vim.fn.chansend(term.job_id, command .. "\n")
+      end)
+    end,
+  })
+  term:toggle()
+end
