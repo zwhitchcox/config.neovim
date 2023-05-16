@@ -118,13 +118,17 @@ wk.setup {
 
 -- Spaced prefixed in Normal mode
 wk.register({
+  ['1'] = { "<cmd>silent !tmux select-window -t 1<cr>", "which_key_ignore" },
+  ['2'] = { "<cmd>silent !tmux select-window -t 2<cr>", "which_key_ignore" },
+  ['3'] = { "<cmd>silent !tmux select-window -t 3<cr>", "which_key_ignore" },
+  ['4'] = { "<cmd>silent !tmux select-window -t 4<cr>", "which_key_ignore" },
   [' '] = {
     name   = "+Terminal",
     ['1']  = { "<cmd>1ToggleTerm<cr>", "First Terminal" },
     ['2']  = { "<cmd>2ToggleTerm<cr>", "Second Terminal" },
     ['3']  = { "<cmd>3ToggleTerm<cr>", "Third Terminal" },
     ['4']  = { "<cmd>3ToggleTerm<cr>", "Fourth Terminal" },
-    d      = { "<cmd>lua OpenTermAndRun('npm run dev')<cr>", "npm run dev" }, -- add this line
+    d      = { "<cmd>lua Dev()<cr>", "dev" }, -- add this line
     n      = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
     u      = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
     t      = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },

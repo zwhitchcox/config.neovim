@@ -8,7 +8,7 @@ require 'toggleterm'.setup {
     if term.direction == "horizontal" then
       return 20
     elseif term.direction == "vertical" then
-      return vim.o.columns * 0.4
+      return vim.o.columns * 0.35
     end
   end,
   open_mapping = [[<c-\>]],
@@ -159,11 +159,11 @@ utils.augroup { name = 'UserToggleTermKeymaps', cmds = {
       -- keyboard mappings
       -- vim.api.nvim_buf_set_keymap(0, 't', '<C-a>', [[<cmd>lua ToggleTerm()<CR>]], { noremap = true, silent = true })
       vim.api.nvim_buf_set_keymap(0, 't', '<C-a-h>', [[<cmd>lua SwitchToggleTerm(-1)<CR>]],
-      { noremap = true, silent = true })
+        { noremap = true, silent = true })
       vim.api.nvim_buf_set_keymap(0, 't', '<C-a-l>', [[<cmd>lua SwitchToggleTerm(1)<CR>]],
-      { noremap = true, silent = true })
+        { noremap = true, silent = true })
       vim.api.nvim_buf_set_keymap(0, 't', '<C-a-t>', [[<cmd>lua ToggleDirectionAll()<CR>]],
-      { noremap = true, silent = true })
+        { noremap = true, silent = true })
     end
   } },
   { 'BufEnter', {
@@ -176,20 +176,3 @@ utils.augroup { name = 'UserToggleTermKeymaps', cmds = {
     end
   } },
 } }
-
-
-
--- Create a new terminal and run a command in it
-function OpenTermAndRun(command)
-  local term = Terminal:new({
-    direction = "vertical",
-    auto_scroll = false,
-    start_in_insert = true,
-    on_open = function(term)
-      vim.schedule(function()
-        vim.fn.chansend(term.job_id, command .. "\n")
-      end)
-    end,
-  })
-  term:toggle()
-end
