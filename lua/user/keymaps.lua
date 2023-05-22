@@ -81,3 +81,15 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
+-- -- Helper function for defining global mappings
+-- local function global_tmux_switch(n)
+--   local tmux_command = string.format("silent !tmux select-window -t %d", n)
+--   for _, mode in ipairs({"n", "i", "v", "t"}) do
+--     keymap(mode, "t" .. n .. "", ":<C-u>" .. tmux_command .. "<CR>", opts)
+--   end
+-- end
+
+-- -- Define the mappings
+-- for i = 1, 9 do
+--   global_tmux_switch(i)
+-- end

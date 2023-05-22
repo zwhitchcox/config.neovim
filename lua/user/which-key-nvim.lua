@@ -277,6 +277,7 @@ wk.register({
   -- Seaching with telescope.nvim
   f = {
     name = '+Find',
+    a = { '<Cmd>TeleScope live_grep_args.live_grep_args()<CR>', 'Live grep args' },
     b = { '<Cmd>Telescope file_browser<CR>', 'File Browser' },
     f = { '<Cmd>Telescope find_files_workspace<CR>', 'Files in workspace' },
     F = { '<Cmd>Telescope find_files<CR>', 'Files in cwd' },

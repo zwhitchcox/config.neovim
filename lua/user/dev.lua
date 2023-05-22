@@ -27,3 +27,5 @@ function Dev()
   vim.cmd("wincmd p")
   vim.cmd("stopinsert")
 end
+
+

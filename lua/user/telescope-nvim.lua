@@ -17,6 +17,8 @@ telescope.load_extension 'fzf'
 telescope.load_extension 'zoxide'
 telescope.load_extension 'ui-select'
 
+local custom_pickers = require 'user.telescope_custom_pickers'
+
 
 telescope.setup {
   defaults = {
@@ -32,26 +34,21 @@ telescope.setup {
       i = {
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
-
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
-
         ["<C-c>"] = actions.close,
-
         ["<Down>"] = actions.move_selection_next,
         ["<Up>"] = actions.move_selection_previous,
-
+        ['<c-f>'] = custom_pickers.actions.set_extension,
+        ['<c-l>'] = custom_pickers.actions.set_folders,
         -- ["<CR>"] = actions.select_default,
         ["<C-x>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
         ["<C-t>"] = actions.select_tab,
-
         ["<C-u>"] = actions.preview_scrolling_up,
         ["<C-d>"] = actions.preview_scrolling_down,
-
         ["<PageUp>"] = actions.results_scrolling_up,
         ["<PageDown>"] = actions.results_scrolling_down,
-
         ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
         ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
         ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
@@ -67,27 +64,21 @@ telescope.setup {
         ["<C-x>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
         ["<C-t>"] = actions.select_tab,
-
         ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
         ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
         ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
         ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-
         ["H"] = actions.move_to_top,
         ["M"] = actions.move_to_middle,
         ["L"] = actions.move_to_bottom,
-
         ["<Down>"] = actions.move_selection_next,
         ["<Up>"] = actions.move_selection_previous,
         ["gg"] = actions.move_to_top,
         ["G"] = actions.move_to_bottom,
-
         ["<C-u>"] = actions.preview_scrolling_up,
         ["<C-d>"] = actions.preview_scrolling_down,
-
         ["<PageUp>"] = actions.results_scrolling_up,
         ["<PageDown>"] = actions.results_scrolling_down,
-
         ["?"] = actions.which_key,
         s = actions.select_horizontal,
         v = actions.select_vertical,
@@ -111,6 +102,10 @@ telescope.setup {
       }
     },
   },
+  live_grep = {
+    ['<c-f>'] = custom_pickers.actions.set_folders,
+    ['<c-e>'] = custom_pickers.actions.set_extension,
+  },
   extensions = {
     -- file_browser = {
     --   hijack_netrw = true,
@@ -119,7 +114,7 @@ telescope.setup {
 }
 
 
-require'telescope._extensions.zoxide.config'.setup {
+require 'telescope._extensions.zoxide.config'.setup {
   mappings = {
     ['<CR>'] = {
       keepinsert = true,
