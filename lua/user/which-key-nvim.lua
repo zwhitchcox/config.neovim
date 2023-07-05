@@ -253,7 +253,7 @@ wk.register({
   l = {
     name = '+LSP',
     h = { '<Cmd>Lspsaga hover_doc<CR>', 'Hover' },
-    d = { vim.lsp.buf.definition, 'Jump to definition' },
+    d = { '<Cmd>lua require(\'telescope.builtin\').lsp_definitions()<CR>', 'Jump to definition' },
     D = { vim.lsp.buf.declaration, 'Jump to declaration' },
     a = { '<Cmd>Lspsaga code_action<CR>', 'Code action' },
     f = { vim.lsp.buf.format, 'Format' },

@@ -112,7 +112,7 @@ return packer.startup(function(use)
   use 'github/Copilot.vim'              -- provides support for the OpenAI code completion tool, Copilot
 
   -- Terminal: provides terminal-related features
-  use 'akinsho/toggleterm.nvim' -- provides a toggleable terminal that can be opened and closed with a single keystroke
+  use 'akinsho/toggleterm.nvim'  -- provides a toggleable terminal that can be opened and closed with a single keystroke
   use 'pantharshit00/vim-prisma' -- syntax highlighting for Prisma
 
   -- Language Specific: provides language-specific features
@@ -134,13 +134,16 @@ return packer.startup(function(use)
   use 'jvgrootveld/telescope-zoxide'            -- adds integration with the Zoxide directory jump tool
   use 'nvim-telescope/telescope-ui-select.nvim' -- provides a UI for selecting multiple results in the fuzzy finder
 
-  use 'f-person/auto-dark-mode.nvim'
-require('packer').use { 'mhartington/formatter.nvim' }
+  use 'MunifTanjim/nui.nvim'
+  use "rcarriga/nvim-notify"
+  use "folke/noice.nvim"
+  use 'JoosepAlviste/palenightfall.nvim'
+  require('packer').use { 'mhartington/formatter.nvim' }
 
 
   -- more
   --
-use 'instant-markdown/vim-instant-markdown'
+  use 'instant-markdown/vim-instant-markdown'
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()

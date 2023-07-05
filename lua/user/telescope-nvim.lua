@@ -16,6 +16,7 @@ telescope.load_extension 'file_browser'
 telescope.load_extension 'fzf'
 telescope.load_extension 'zoxide'
 telescope.load_extension 'ui-select'
+-- telescope.load_extension 'noice'
 
 local custom_pickers = require 'user.telescope_custom_pickers'
 
@@ -103,8 +104,8 @@ telescope.setup {
     },
   },
   live_grep = {
-    ['<c-f>'] = custom_pickers.actions.set_folders,
-    ['<c-e>'] = custom_pickers.actions.set_extension,
+    ['<c-l>'] = custom_pickers.actions.set_folders,
+    ['<c-f>'] = custom_pickers.actions.set_extension,
   },
   extensions = {
     -- file_browser = {
