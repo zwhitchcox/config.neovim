@@ -21,7 +21,7 @@ function OpenTermAndRun(command)
 end
 
 function Dev()
-  OpenTermAndRun("npm run dev")
+  OpenTermAndRun("pnpm dev")
   vim.cmd("wincmd p")
   vim.cmd("NvimTreeOpen")
   vim.cmd("wincmd p")
