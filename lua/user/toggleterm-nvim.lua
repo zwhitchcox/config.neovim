@@ -141,6 +141,23 @@ function ToggleDirectionAll()
   end
 end
 
+
+function TmuxWindow1()
+    vim.cmd("!tmux select-window -t 1")
+end
+
+function TmuxWindow2()
+    vim.cmd("!tmux select-window -t 2")
+end
+
+function TmuxWindow3()
+    vim.cmd("!tmux select-window -t 3")
+end
+
+function TmuxWindow4()
+    vim.cmd("!tmux select-window -t 4")
+end
+
 utils.augroup { name = 'UserToggleTermKeymaps', cmds = {
   { 'FileType', {
     pattern = 'toggleterm',
@@ -150,6 +167,15 @@ utils.augroup { name = 'UserToggleTermKeymaps', cmds = {
         { '<ESC>', '<Cmd>ToggleTerm<CR>' },
       } }
       local opts = { noremap = true }
+
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-A>', [[<cmd>lua TmuxWindow1()<CR>]],
+        { noremap = true, silent = true })
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-S>', [[<cmd>lua TmuxWindow2()<CR>]],
+        { noremap = true, silent = true })
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-D>', [[<cmd>lua TmuxWindow3()<CR>]],
+        { noremap = true, silent = true })
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-F>', [[<cmd>lua TmuxWindow4()<CR>]],
+        { noremap = true, silent = true })
       -- vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
       vim.api.nvim_buf_set_keymap(0, 't', 'kj', [[<C-\><C-n>]], opts)
       vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
